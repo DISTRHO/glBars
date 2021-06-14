@@ -11,7 +11,7 @@ all: dgl plugins gen
 # --------------------------------------------------------------
 
 dgl:
-	$(MAKE) -C dpf/dgl
+	$(MAKE) -C dpf/dgl opengl
 
 plugins: dgl
 	$(MAKE) all -C plugins/glBars
