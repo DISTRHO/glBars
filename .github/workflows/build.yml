@@ -103,9 +103,11 @@ jobs:
         run: |
           sudo dpkg --add-architecture i386
           sudo apt-get update -qq
-          sudo apt-get install -yqq g++-multilib libasound2-dev:i386 libcairo2-dev:i386 libdbus-1-dev:i386 libgl1-mesa-dev:i386 liblo-dev:i386 libpulse-dev:i386 libx11-dev:i386 libxcursor-dev:i386 libxext-dev:i386 libxrandr-dev:i386
+          sudo apt-get install -yqq g++-i686-linux-gnu libasound2-dev:i386 libcairo2-dev:i386 libdbus-1-dev:i386 libgl1-mesa-dev:i386 liblo-dev:i386 libpulse-dev:i386 libx11-dev:i386 libxcursor-dev:i386 libxext-dev:i386 libxrandr-dev:i386
       - name: Build linux i686
         env:
+          CC: i686-linux-gnu-gcc
+          CXX: i686-linux-gnu-g++
           CFLAGS: -m32
           CXXFLAGS: -m32
           LDFLAGS: -m32 -static-libgcc -static-libstdc++
