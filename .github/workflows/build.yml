@@ -22,7 +22,7 @@ jobs:
         run: |
           sudo rm -f /etc/apt/sources.list.d/microsoft-prod.list
           sudo apt-get update -qq
-          sudo apt-get install -yqq --allow-downgrades libpcre2-8-0/focal
+          sudo apt-get install -yqq --allow-downgrades libpcre2-8-0/focal libpcre2-16-0/focal libpcre2-32-0/focal libpcre2-posix2/focal
       - name: Set up dependencies
         run: |
           sudo dpkg --add-architecture arm64
@@ -60,7 +60,7 @@ jobs:
         run: |
           sudo rm -f /etc/apt/sources.list.d/microsoft-prod.list
           sudo apt-get update -qq
-          sudo apt-get install -yqq --allow-downgrades libpcre2-8-0/focal
+          sudo apt-get install -yqq --allow-downgrades libpcre2-8-0/focal libpcre2-16-0/focal libpcre2-32-0/focal libpcre2-posix2/focal
       - name: Set up dependencies
         run: |
           sudo dpkg --add-architecture armhf
@@ -98,7 +98,7 @@ jobs:
         run: |
           sudo rm -f /etc/apt/sources.list.d/microsoft-prod.list
           sudo apt-get update -qq
-          sudo apt-get install -yqq --allow-downgrades libpcre2-8-0/focal
+          sudo apt-get install -yqq --allow-downgrades libpcre2-8-0/focal libpcre2-16-0/focal libpcre2-32-0/focal libpcre2-posix2/focal
       - name: Set up dependencies
         run: |
           sudo dpkg --add-architecture i386
@@ -193,7 +193,7 @@ jobs:
         run: |
           sudo rm -f /etc/apt/sources.list.d/microsoft-prod.list
           sudo apt-get update -qq
-          sudo apt-get install -yqq --allow-downgrades libpcre2-8-0/focal
+          sudo apt-get install -yqq --allow-downgrades libpcre2-8-0/focal libpcre2-16-0/focal libpcre2-32-0/focal libpcre2-posix2/focal
       - name: Set up dependencies
         run: |
           sudo dpkg --add-architecture i386
@@ -327,14 +327,14 @@ jobs:
             done
       - name: Test VST2 plugins
         run: |
-            for p in $(ls bin/ | grep vst.so); do \
+            for p in $(find bin/ | grep -e vst.so -e '.*\.vst/.*\.so'); do \
                 env CARLA_BRIDGE_DUMMY=1 CARLA_BRIDGE_TESTING=native \
                     valgrind \
                     --error-exitcode=255 \
                     --leak-check=full \
                     --track-origins=yes \
                     --suppressions=./dpf/utils/valgrind-dpf.supp \
-                    /usr/lib/carla/carla-bridge-native vst2 ./bin/${p} "" 1>/dev/null; \
+                    /usr/lib/carla/carla-bridge-native vst2 ./${p} "" 1>/dev/null; \
             done
       - name: Test VST3 plugins
         run: |
