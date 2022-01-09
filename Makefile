@@ -11,7 +11,7 @@ all: dgl plugins gen
 # --------------------------------------------------------------
 
 dgl:
-	$(MAKE) -C dpf/dgl opengl
+	$(MAKE) -C dpf/dgl opengl FILE_BROWSER_DISABLED=true
 
 plugins: dgl
 	$(MAKE) all -C plugins/glBars
